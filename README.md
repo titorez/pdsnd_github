@@ -16,6 +16,10 @@ The dataset used for this analysis is in CSV format for each city:
 
 The data includes information about bike rides, such as start time, end time, trip duration, start station, end station, user type, gender (not available for Washington), and birth year (not available for Washington).
 
+### Libraries Used
+- pandas
+- time
+
 ### Credits
 This project was developed as part of the Udacity Programming for Data Science Nanodegree program.
 

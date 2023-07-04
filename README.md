@@ -20,6 +20,9 @@ The data includes information about bike rides, such as start time, end time, tr
 - pandas
 - time
 
+### Contributing
+Contributions are welcome! If you find any issues or want to enhance the code, feel free to submit a pull request.
+
 ### Credits
 This project was developed as part of the Udacity Programming for Data Science Nanodegree program.
 

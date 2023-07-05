@@ -7,6 +7,33 @@ city_name_data = {
     "washington": ("washington.csv", "Washington"),
 }
 
+month_name = [
+    "all",
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+]
+
+day_name = [
+    "all",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+]
+
 
 def get_filters():
     """
@@ -70,21 +97,7 @@ def get_month_input():
             .replace(" ", "")
             .lower()
         )
-        if month in [
-            "all",
-            "january",
-            "february",
-            "march",
-            "april",
-            "may",
-            "june",
-            "july",
-            "august",
-            "september",
-            "october",
-            "november",
-            "december",
-        ]:
+        if month in month_name:
             return month.capitalize()
         else:
             print("\nInvalid month name, please choose a valid month. \n")
@@ -105,16 +118,7 @@ def get_day_input():
             .replace(" ", "")
             .lower()
         )
-        if day in [
-            "all",
-            "monday",
-            "tuesday",
-            "wednesday",
-            "thursday",
-            "friday",
-            "saturday",
-            "sunday",
-        ]:
+        if day in day_name:
             return day.capitalize()
         else:
             print("\nInvalid day of week, please choose a valid day of week. \n")

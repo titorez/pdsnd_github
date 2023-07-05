@@ -1,16 +1,10 @@
 import time
 import pandas as pd
 
-city_data = {
-    "chicago": "chicago.csv",
-    "newyorkcity": "new_york_city.csv",
-    "washington": "washington.csv",
-}
-
-city_names = {
-    "chicago": "Chicago",
-    "newyorkcity": "New York City",
-    "washington": "Washington",
+city_name_data = {
+    "chicago": ("chicago.csv", "Chicago"),
+    "newyorkcity": ("new_york_city.csv", "New York City"),
+    "washington": ("washington.csv", "Washington"),
 }
 
 
@@ -55,7 +49,7 @@ def get_city_input():
             .replace(" ", "")
             .lower()
         )
-        if city in ["chicago", "newyorkcity", "washington"]:
+        if city in city_name_data:
             return city
         else:
             print("\nInvalid city name, please choose a valid city. \n")
@@ -137,7 +131,7 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     # load city data file into dataframe
-    df = pd.read_csv(city_data[city])
+    df = pd.read_csv(city_name_data[city][0])
 
     # Convert Start Time to datetime
     df["Start Time"] = pd.to_datetime(df["Start Time"])
@@ -149,7 +143,7 @@ def load_data(city, month, day):
     if day != "All":
         # Filter the dataframe by the day of week of Start Time
         df = df[df["Start Time"].dt.day_name() == day]
-    #print("shape: {}".format(df.shape[0]))
+    # print("shape: {}".format(df.shape[0]))
     return df
 
 
@@ -169,7 +163,8 @@ def time_stats(df, month, day):
     if month != "All":
         print("The most common month is {}.\n".format(month))
     else:
-        print("The most common month is {}.\n".format(most_common_month_name(df)))
+        print("The most common month is {}.\n".format(
+            most_common_month_name(df)))
 
     # display the most common day of week
     if day != "All":
@@ -240,12 +235,14 @@ def station_stats(df):
     # display most commonly used start station
     most_common_start_station_name = df["Start Station"].mode()[0]
     print(
-        "The most common start station is {}.\n".format(most_common_start_station_name)
+        "The most common start station is {}.\n".format(
+            most_common_start_station_name)
     )
 
     # display most commonly used end station
     most_common_end_station_name = df["End Station"].mode()[0]
-    print("The most common end station is {}.\n".format(most_common_end_station_name))
+    print("The most common end station is {}.\n".format(
+        most_common_end_station_name))
 
     # display most frequent combination of start station and end station trip
     df["Start and End Station Combined"] = (
@@ -276,11 +273,13 @@ def trip_duration_stats(df):
 
     # display total travel time
     print(
-        "The total travel time is {} seconds.\n".format(total_travel_time_seconds(df))
+        "The total travel time is {} seconds.\n".format(
+            total_travel_time_seconds(df))
     )
 
     # display mean travel time
-    print("The mean travel time is {} seconds.\n".format(mean_travel_time_seconds(df)))
+    print("The mean travel time is {} seconds.\n".format(
+        mean_travel_time_seconds(df)))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print("-" * 40)
@@ -328,7 +327,8 @@ def user_stats(df, city):
     print(count_by_user_types(df))
 
     if "Gender" not in df.columns:
-        print("\nWe do not have user gender data for {}.\n".format(city_names[city]))
+        print("\nWe do not have user gender data for {}.\n".format(
+            city_name_data[city][1]))
     else:
         print("\nCount by User Gender:\n")
         print(count_by_user_gender(df))
@@ -337,13 +337,15 @@ def user_stats(df, city):
     if "Birth Year" not in df.columns:
         print(
             "\nWe do not have user year of birth data for {}.\n".format(
-                city_names[city]
+                city_name_data[city][1]
             )
         )
     else:
         print("\nYear birth analysis:\n")
-        print("The first user year of birth is {}.\n".format(user_first_birth_year(df)))
-        print("The last user year of birth is {}.\n".format(user_last_birth_year(df)))
+        print("The first user year of birth is {}.\n".format(
+            user_first_birth_year(df)))
+        print("The last user year of birth is {}.\n".format(
+            user_last_birth_year(df)))
         print(
             "The most common user year of birth is {}.\n".format(
                 user_most_common_birth_year(df)
@@ -498,7 +500,7 @@ def show_raw_data(df, raw_data_init_row):
         df - Pandas DataFrame containing city data filtered by month and day
         raw_data_init_row - Initial row number for displaying raw data
     """
-    print(df[raw_data_init_row : raw_data_init_row + 5].to_string())
+    print(df[raw_data_init_row: raw_data_init_row + 5].to_string())
 
 
 def main():
